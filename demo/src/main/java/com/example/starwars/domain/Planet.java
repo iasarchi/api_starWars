@@ -16,4 +16,6 @@ public class Planet {
     @Column
     private String terrain;
 
+    @Column
+    private Integer apparitions;
 }

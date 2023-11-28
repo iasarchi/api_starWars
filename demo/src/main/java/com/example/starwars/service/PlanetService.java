@@ -1,5 +1,6 @@
 package com.example.starwars.service;
 
+import com.example.starwars.api.StarWarsApi;
 import com.example.starwars.domain.Planet;
 import com.example.starwars.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,11 @@ public class PlanetService {
     @Autowired
     private PlanetRepository planetRepository;
 
+    @Autowired
+    private StarWarsApi starWarsApi;
+
     public Planet savePlanet(Planet planet) {
+        planet.setApparitions(starWarsApi.getApparitionsByName(planet.getName()));
         return planetRepository.save(planet);
     }
 
@@ -21,9 +26,6 @@ public class PlanetService {
         return planetRepository.findAll();
     }
 
-    public List<Planet> findPlanetByNames(List<String> planetName) {
-        return planetRepository.findByNameIn(planetName);
-    }
 
     public List<Planet> findPlanetByName(String planetName) {
        return planetRepository.findByName(planetName);
