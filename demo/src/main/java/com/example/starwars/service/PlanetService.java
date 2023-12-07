@@ -26,6 +26,9 @@ public class PlanetService {
         return planetRepository.findAll();
     }
 
+    public List<Planet> findPlanetByNames(List<String> planetName) {
+        return planetRepository.findByNameIn(planetName);
+    }
 
     public List<Planet> findPlanetByName(String planetName) {
        return planetRepository.findByName(planetName);
